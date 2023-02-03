@@ -1,6 +1,11 @@
+import uuid
+
 class Boat:
-    def __init__(self, id):
-        self._id = id
+    def __init__(self, id=None):
+        self._id = uuid.uuid4()
+        if isinstance(id, uuid.UUID):
+            self._id = id
+
         self.vectors = []
         self.coords = (0, 0)
 

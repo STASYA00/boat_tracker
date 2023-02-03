@@ -6,7 +6,7 @@ class VideoConfig(metaclass=SingletonMeta):
     def __init__(self):
         self._width = 1280
         self._height = 720
-        self._name = "out.avi"
+        self._name = "./out.avi"
 
     @property
     def width(self):
@@ -36,9 +36,9 @@ class VideoW:
                                (self.config.width, self.config.height))
         
     def write(self, frame):
-        assert (frame.shape[0]==self.width and frame.shape[1]==self.height), 
+        assert (frame.shape[0]==self.config.height and frame.shape[1]==self.config.width), \
         "Wrong frame size: {}x{} instead of {}x{}".format(frame.shape[0], frame.shape[1],
-                                                          self.width, self.height)
+                                                          self.config.width, self.config.height)
         self._out.write(frame)
 
     def end(self):

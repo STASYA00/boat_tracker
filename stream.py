@@ -2,7 +2,7 @@ import cv2
 
 class Stream:
     def __init__(self, fname:str=None) -> None:
-        self.fname = fname
+        self._fname = fname
         self._stream = self._load()
 
     def _load(self):
@@ -12,7 +12,7 @@ class Stream:
         self._stream.release()
 
     def set_current(self, frame):
-        assert (frame>=0 and frame<self.frames), 
+        assert (frame>=0 and frame<self.frames), \
         "Frame number {} does not fall in the range {}..{}".format(frame, 0, self.frames)
         
         self._stream.set(cv2.CAP_PROP_POS_FRAMES, frame)
@@ -27,7 +27,7 @@ class Stream:
 
     @property
     def frame_rate(self):
-        return self._stream.get(cv2.CAP_PROP_POS_FRAMES)
+        return self._stream.get(cv2.CAP_PROP_FPS)
 
     @property
     def width(self):
@@ -36,6 +36,10 @@ class Stream:
     @property
     def height(self):
         return self._stream.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+    @property
+    def fname(self):
+        return self._fname
 
     @property
     def frames(self):

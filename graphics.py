@@ -40,16 +40,23 @@ class Graphics:
 
         return self._make(frame, boat, bb)
 
-    def _check(self, bb):
-        p = (360 - bb[1]) / (bb[3] - bb[1])
-        return p < self.thr
+    def _check(self, y, bb):
+        if (bb[1] < y and bb[3] < y):
+            return True
+        elif (bb[3]>y):
+            p = (bb[3] - y) / (bb[3] - bb[1])
+            return p < self.thr
+        return False
 
-    def _make(self, frame, boat, bb):
+    def _make(self, frame, label, bb):
         # box is [x,y,w,h]
-        if (self.check(bb)):
+        if (self._check(frame.shape[0]*0.5, bb)):
+            print("passed")
             p1 = (int(bb[0]), int(bb[1]))
             p2 = (int(bb[0] + bb[2]), int(bb[1] + bb[3]))
 
+            orig = (p1[0], p1[1] - 5)
             cv2.rectangle(frame, p1, p2, self.config.color, self.config.stroke)
-            cv2.putText(frame, self.config.name.format(boat.id), p1, 
+            cv2.putText(frame, self.config.name.format(label), orig, 
                         self.config.font, self.config.fontscale, self.config.color)
+        return frame

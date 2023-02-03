@@ -3,7 +3,6 @@ from enum import Enum
 
 from config import Config
 from singleton_meta import SingletonMeta
-from utils import yolo2Bbox
 
 class MODELS(Enum):
     YOLO3= 0
@@ -21,10 +20,10 @@ class ModelStd:
         return (self._name, self._repo)
 
 
-class ModelFactory(SingletonMeta):
+class ModelFactory(metaclass=SingletonMeta):
     def __init__(self) -> None:
         self._content = {
-            MODELS.YOLO3:       ModelStd("yolov5l", 'ultralytics/yolov3'),
+            MODELS.YOLO3:       ModelStd("yolov3", 'ultralytics/yolov3'),
             MODELS.YOLO5:       ModelStd("yolov5l", 'ultralytics/yolov5'),
             MODELS.YOLOV5L6:    ModelStd("yolov5l6", 'ultralytics/yolov5'),
             MODELS.YOLOV5N:     ModelStd("yolov5n", 'ultralytics/yolov5'),
@@ -50,8 +49,9 @@ class BoatDetector:
     def __init__(self, model:MODELS=MODELS.YOLO5) -> None:
         assert isinstance(model, MODELS), "This model is not supported"
         self.name = "generic class"
-        self.model = model
+        self.model_name = model
         self.config = Config()
+        self.model = self._load_model()
 
     def run(self, frame) -> list:
         """
@@ -60,8 +60,8 @@ class BoatDetector:
         return self._run(frame)
 
     def _load_model(self)-> None:
-        m = ModelFactory().content[self.model]
-        self.model = torch.hub.load(m[1], m[0]) 
+        m = ModelFactory().content[self.model_name].get_value()
+        return torch.hub.load(m[1], m[0]) 
 
     def _run(self, frame) -> list:
         preds = self.model(frame)

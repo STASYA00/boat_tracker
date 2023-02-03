@@ -14,6 +14,8 @@ class Pipeline:
             _, frame = self._stream.stream.read()
             if not self._run(frame):
                 break
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+                break
 
         self._stream.end()
         return
