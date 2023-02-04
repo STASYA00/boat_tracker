@@ -37,7 +37,7 @@ class TrackerFactory(metaclass=SingletonMeta):
 
 class Tracker:
     def __init__(self, tracker_type=TRACKERS.MOSSE):
-        self.tracker = None
+        self._tracker = None
         self.new()
         self._tracker_type = tracker_type
 
@@ -52,6 +52,17 @@ class Tracker:
 
     def new(self)->None:
         #self._tracker = cv2.legacy.MultiTracker_create()
+        return
+
+    def update(self, frame)->list:
+        _, boxes = self._tracker.update(frame)
+        return boxes
+
+class DeepSortTracker(Tracker):
+    def __init__(self, tracker_type=TRACKERS.DEEPSORT):
+        super().__init__(tracker_type)
+
+    def add(self, frame, boxes)->None:
         return
 
     def update(self, frame)->list:

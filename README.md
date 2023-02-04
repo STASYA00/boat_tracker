@@ -37,3 +37,7 @@ The guy participating in the competition is smart and probably knows that most o
 be able to tell that it is the exact same boat, just seen from different angles with a large gap in time. The extension of
 this work would be to track the positions of the boats on the map with respect to the camera trajectory and check whether
 the detected boat was potentially tracked before. <illustration> In a simplified form it would not even need the camera characteristics.
+
+Another obvious issue is the occlusion problem. The objects are neither detected nor tracked well when they are occluded by other objects (especially the ones belonging to the same category)
+
+Yolo is not good at recognizing small objects, so some boats that are far away remain undetected. It works better with Yolo7, but it's not perfect. It would be interesting to create an assemble of models to resolve this issue.
