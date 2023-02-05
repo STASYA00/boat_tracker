@@ -148,8 +148,11 @@ to run torch with CUDA
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+In case you ever need to count boats on a video (or other objects as well, which will be supported later on), use this application on it!
 
-https://user-images.githubusercontent.com/30144984/216849013-6fe10463-b513-4231-aa69-81f21d8ab5cc.mp4
+
+https://user-images.githubusercontent.com/30144984/216849201-4ac91c37-8f5f-4a28-be91-b5377a2d3314.mp4
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
