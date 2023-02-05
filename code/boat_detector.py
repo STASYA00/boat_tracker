@@ -6,6 +6,9 @@ from config import Config
 from singleton_meta import SingletonMeta
 
 class MODELS(Enum):
+    """
+    Enumerator of different models.
+    """
     YOLO3= 0
     YOLO5= 1
     YOLOV5L6= 2
@@ -13,15 +16,29 @@ class MODELS(Enum):
     YOLO7= 4
 
 class ModelStd:
+    """
+    Placeholder for values to download a model in a standardized way.
+
+    :params: name       name of the model in the hub, str
+    :params: repo       name of the repo to download the model from, str
+    """
     def __init__(self, name:str, repo:str)-> None:
         self._name = name
         self._repo = repo
     
-    def get_value(self) -> tuple:
+    def get_value(self) -> tuple(str,str):
+        """
+        Function that returns the values of the model, tuple (name:str, repo:str)
+        """
         return (self._name, self._repo)
 
 
 class ModelFactory(metaclass=SingletonMeta):
+    """
+    Object that holds the mapping for the models based on their type.
+
+    :params: content        dict containing model mapping: model enum - model placeholder with the values (MODEL: ModelStd())
+    """
     def __init__(self) -> None:
         self._content = {
             MODELS.YOLO3:       ModelStd("yolov3", 'ultralytics/yolov3'),
@@ -33,6 +50,9 @@ class ModelFactory(metaclass=SingletonMeta):
 
     @property
     def content(self) -> dict:
+        """
+        Function that returns the mapping
+        """
         return self._content
 
 class Bbox:
@@ -40,57 +60,68 @@ class Bbox:
     Standardization of bbox.
     """
     def yolo2standard(xyxy) -> list:
+        """
+        Function that brings yolo bbox xyxy annotation to standard format [left, top, w, h]
+        """
         w = xyxy[2] - xyxy[0]
         h = xyxy[3] - xyxy[1]
         return [xyxy[0], xyxy[1], w, h]
 
-    # def yolo2standardTensor(xyxy):
-    #     if (isinstance(xyxy, torch.Tensor)):
-    #         xywh = xyxy.clone()
-    #     else:
-    #         xywh = np.copy(xyxy)
-            
-    #     xywh[..., 0] = (xyxy[..., 0] + xyxy[..., 2]) / 2  # x center
-    #     xywh[..., 1] = (xyxy[..., 1] + xyxy[..., 3]) / 2  # y center
-    #     xywh[..., 2] = xyxy[..., 2] - xyxy[..., 0]  # width
-    #     xywh[..., 3] = xyxy[..., 3] - xyxy[..., 1]  # height
-    #     return xywh
-
 
 
 class BoatDetector:
+    """
+    Object that is responsible for detection process.
+    :params: model_name         model to use for detection, one of MODELS, default MODELS.YOLO5
+    :params: config             config with the parameters to use, Config
+    :params: model              model to perform the detection with
+
+    """
     def __init__(self, model:MODELS=MODELS.YOLO5) -> None:
         assert isinstance(model, MODELS), "This model is not supported"
-        self.name = "generic class"
+        
         self.model_name = model
-        self.config = Config()
-        self.model = self._load_model()
+        self._config = Config()
+        self._model = self._load_model()
 
     def run(self, frame) -> torch.Tensor:
         """
+        Function that performs detection on a given frame.
+        :params: frame      frame to detect the objects within, np.ndarray (h, w, 3)
         returns: bbs        bboxes of detected boats in a standard fmt [left, top, w, h]
         """
         return self._run(frame)
 
     def _load_model(self)-> None:
+        """
+        Function that loads a model based on a chosen model type.
+
+        returns: model      loaded model from torch hub
+        """
         m = ModelFactory().content[self.model_name].get_value()
         return torch.hub.load(m[1], m[0]) 
 
     def _run(self, frame) -> torch.Tensor:
-        preds = self.model(frame)
+        """
+        Function that performs detection on a given frame.
+        :params: frame      frame to detect the objects within, np.ndarray (h, w, 3)
+        returns: bbs        bboxes of detected boats in a standard fmt [left, top, w, h]
+        """
+        preds = self._model(frame)
         return self._standardize_preds(preds)
 
     def _standardize_preds(self, res) -> torch.Tensor:
         """
         Brings the predictions to a standard format [left, top, w, h] - changed; 
-        now centerx, centery, w, h, conf, cls : deepsort takes it that way
+        now centerx, centery, w, h, conf, cls : deepsort takes it that way.
+        Predictions are filtered based on the desired detection category and confidence.
+        :params: res        prediction result, Detection
+        returns: res        transformed and filtered detections, torch.Tensor
         """
         res = res.xywh[0]
-        res = res[res[:, -1]==self.config.category]
-        res = res[res[:, -2]>=self.config.confidence]
+        res = res[res[:, -1]==self._config.category]
+        res = res[res[:, -2]>=self._config.confidence]
         return res
-        #return [Bbox.yolo2standard(a) for a in res.xyxy[0].tolist() if (a[-1]==self.config.category and 
-                                                                        # a[-2]>=self.config.confidence)]
 
     
     
