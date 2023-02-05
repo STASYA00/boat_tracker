@@ -31,5 +31,5 @@ if __name__ == "__main__":
      
     args = parser.parse_args()
     
-    pipe = Yolo5DeepSortPipeline(args.source, write=True, show=False)
+    pipe = Yolo5DeepSortPipeline(args.source, write=True, show=True)
     pipe.run()

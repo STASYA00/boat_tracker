@@ -6,7 +6,7 @@ from boat import *
 from boat_detector import *
 from config import DeepSortConfig
 from stream import Stream
-from video_w import VideoW
+from video_w import VideoW, VideoConfig
 from graphics import Graphics
 
 sys.path.append('../deep_sort')
@@ -40,7 +40,9 @@ class Pipeline:
         f = 0
         self._stream.set_current(f)
         while self._stream.stream.isOpened():
-            _, frame = self._stream.stream.read()
+            success, frame = self._stream.stream.read()
+            if not success:
+                break
             print("Processing frame {}".format(f)) # being user-friendly
             if not self._run(frame):
                 break
@@ -55,6 +57,7 @@ class Pipeline:
         self._stream.end()
         if self._out:
             self._out.end()
+            print("Output is written to {}".format(VideoConfig().name))
         return
 
     def _run(self, frame) -> bool:
@@ -107,7 +110,7 @@ class Yolo5DeepSortPipeline(Pipeline):
         :params: frame          matrix to process, np.ndarray(h, w, ch)
         """
         res = self._model.run(frame)
-        res = self._tracker.update(res[:, :4], res[:,4], res[:,-1], frame)
+        res = self._tracker.update(res[:, :4].cpu(), res[:,4].cpu(), res[:,-1].cpu(), frame)
 
         for r in res:
             label = r[4]
