@@ -37,6 +37,7 @@ class Pipeline:
                 cv2.imshow("", frame)
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 break
+            f += 1
 
         self._stream.end()
         if self._out:

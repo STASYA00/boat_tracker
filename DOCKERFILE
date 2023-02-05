@@ -1,16 +1,16 @@
 FROM nvidia/cuda:11.5.1-base-ubuntu20.04
 
-ENV TZ=Europe/Stockholm
-
-RUN apt-get -y update
+RUN apt update && apt install tzdata -y
+ENV TZ="Europe/Stockholm"
 
 RUN apt-get install -y python3 \
 git \ 
 make \
 build-essential \
-python3-pip
-
-RUN apt-get install ffmpeg libsm6 libxext6  -y
+python3-pip \
+ffmpeg \
+libsm6 \
+libxext6
 
 RUN git clone -b dev https://github.com/STASYA00/boat_tracker.git
 
