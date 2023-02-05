@@ -20,10 +20,7 @@
   <h3 align="center" Boat Tracker </h3>
 
   <p align="center">
-    A small application to track boats with a moving camera.
-    <br />
-    <a href="https://github.com/STASYA00/boat_tracker"><strong>Explore the docs »</strong></a>
-    <br />
+    Track the boats!
     <br />
     <a href="https://github.com/STASYA00/boat_tracker">View Demo</a>
     ·
@@ -70,7 +67,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/STASYA00/boat_tracker/)
+[![Boat Tracker][product-screenshot]](https://github.com/STASYA00/boat_tracker/)
 
 This is an application to track and count boats with a moving camera.
 
@@ -89,10 +86,10 @@ This is an application to track and count boats with a moving camera.
 ### Built With
 
 
-* python
-* torch
-* openCV
-* Docker
+* [python](https://www.python.org/)
+* [torch](https://pytorch.org/)
+* [openCV](https://opencv.org/)
+* [Docker](https://docs.docker.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -101,12 +98,11 @@ This is an application to track and count boats with a moving camera.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+
 * Docker
   install [Docker](https://docs.docker.com/get-docker/)
 * with conda or venv: create a new environment
@@ -171,7 +167,7 @@ Moreover, the model is fairly compact and can potentially be implemented on an e
 Second part involved tracking the objects across different frames. There are several tracking algorithms, they can be divided into batch and online algorithms. Since speed was the main factor, the choice fell on the online algorithms. Some of the [batch algorithms implemented by OpenCV](https://broutonlab.com/blog/opencv-object-tracking) were also tested applied to the video and work relatively well applied to the problem. However, even the fastest algorithm ([MOSSE](https://docs.opencv.org/3.4/d0/d02/classcv_1_1TrackerMOSSE.html)) was too slow for online detection, not talking about CSRT.
 [DeepSort](https://arxiv.org/abs/1703.07402) is an extension of the SORT algorithm with the use of the appearance information. [Here](https://learnopencv.com/understanding-multiple-object-tracking-using-deepsort/) there is a more detailed explanation and comparison of different trackers' speed and accuracy. DeepSort does not provide the highest accuracy, but it is faster than the alternative algorithms.
 
-These two parts were combined in an application designed with the possibility of changing the chosen models (using other Yolo versions or other tracker versions), the detected category and the objective. The graphical part is implemented with the use of OpenCV functions. Both parts together work relatively fast on GPU (realtime) and quite slow on CPU. We assume that GPU is used.
+These two parts were combined in an application designed with the possibility of changing the chosen models (using other Yolo versions or other tracker versions), the detected category and the objective. The architecture is thought to be recyclable and usable in the future projects as well. The graphical part is implemented with the use of OpenCV functions. Both parts together work relatively fast on GPU (realtime) and quite slow on CPU. We assume that GPU is used.
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -224,7 +220,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 
-
 ## Contact
 
 Stasja - [@stasya00](https://stasyafedorova.wixsite.com/designautomation) - [e-mail](mailto:0.0stasya@gmail.com)
@@ -236,11 +231,11 @@ Stasja - [@stasya00](https://stasyafedorova.wixsite.com/designautomation) - [e-m
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [My favorite README template](https://github.com/othneildrew/Best-README-Template)
 * [Yolo](https://github.com/ultralytics/yolov5)
 * [Yolo7 Implementation](https://github.com/WongKinYiu/yolov7)
 * [DeepSort implementation](https://github.com/mahimairaja/vehicle-counting-yolov5)
 * [Ffmpeg](https://www.ffmpeg.org/)
+* [My favorite README template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
