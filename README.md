@@ -243,6 +243,7 @@ Stasja - [@stasya00](https://stasyafedorova.wixsite.com/designautomation) - [e-m
 * [DeepSort implementation](https://github.com/mahimairaja/vehicle-counting-yolov5)
 * [Ffmpeg](https://www.ffmpeg.org/)
 * [My favorite README template](https://github.com/othneildrew/Best-README-Template)
+* [Candela](https://candela.com/) - inspiration, input and great task!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
