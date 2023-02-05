@@ -24,9 +24,11 @@ class Pipeline:
             self._out = VideoW(self._stream.frame_rate)
 
     def run(self):
-        self._stream.set_current(0)
+        f = 0
+        self._stream.set_current(f)
         while self._stream.stream.isOpened():
             _, frame = self._stream.stream.read()
+            print("Processing frame {}".format(f))
             if not self._run(frame):
                 break
             if self._out:

@@ -1,4 +1,7 @@
-FROM ubuntu:20.04
+FROM nvidia/cuda:11.5.1-base-ubuntu20.04
+
+ENV TZ=Europe/Stockholm
+
 RUN apt-get -y update
 
 RUN apt-get install -y python3 \
@@ -7,13 +10,18 @@ make \
 build-essential \
 python3-pip
 
-RUN git clone https://github.com/STASYA00/boat_tracker.git
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+
+RUN git clone -b dev https://github.com/STASYA00/boat_tracker.git
 
 RUN pip3 install --upgrade pip
 
-RUN cd ./boat_tracker
+WORKDIR "./boat_tracker"
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ./requirements.txt
 
-RUN chmod u+x main.py
+RUN chmod u+x code/main.py
 
+COPY code/tests/1.mp4 code/tests/1.mp4
+
+CMD sh

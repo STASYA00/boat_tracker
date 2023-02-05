@@ -11,7 +11,7 @@ class PipeTest(unittest.TestCase):
 
     def test(self):
 
-        pipe = Yolo5DeepSortPipeline(ASSET, write=True, show=True)
+        pipe = Yolo5DeepSortPipeline(ASSET, write=True, show=False)
         pipe.run()
         self.assertEqual(1, 1)
 
