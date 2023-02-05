@@ -67,7 +67,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Boat Tracker][product-screenshot]](https://github.com/STASYA00/boat_tracker/)
+
+https://user-images.githubusercontent.com/30144984/216849013-6fe10463-b513-4231-aa69-81f21d8ab5cc.mp4
+
 
 This is an application to track and count boats with a moving camera.
 
@@ -146,6 +148,8 @@ to run torch with CUDA
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+
+https://user-images.githubusercontent.com/30144984/216849013-6fe10463-b513-4231-aa69-81f21d8ab5cc.mp4
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
