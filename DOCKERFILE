@@ -1,17 +1,17 @@
 FROM ubuntu:20.04
 RUN apt-get -y update
 
-RUN apt-get install python=3.8 \
+RUN apt-get install -y python3 \
 git \ 
 make \
-build-essentials \
+build-essential \
 python3-pip
 
 RUN git clone https://github.com/STASYA00/boat_tracker.git
 
-RUN pip3 install --upgrade pip3
+RUN pip3 install --upgrade pip
 
-RUN cd code
+RUN cd ./boat_tracker
 
 RUN pip3 install -r requirements.txt
 
