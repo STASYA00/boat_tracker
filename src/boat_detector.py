@@ -26,7 +26,7 @@ class ModelStd:
         self._name = name
         self._repo = repo
     
-    def get_value(self) -> tuple(str,str):
+    def get_value(self) -> tuple:
         """
         Function that returns the values of the model, tuple (name:str, repo:str)
         """

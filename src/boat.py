@@ -40,7 +40,7 @@ class Collection:
         self._type = t
         self._content = {}
 
-    def add(self, boat:Boat | any, label:int)-> None:
+    def add(self, boat:Boat, label:int)-> None:
         """
         Function that adds given object to the collection.
 
@@ -65,7 +65,7 @@ class Collection:
         if label in self._content:
             del self._content[label]
         
-    def get_id(self, label)-> uuid.UUID | None:
+    def get_id(self, label)-> uuid.UUID:
         """
         Function that gets the id of the element by its label.
         :params: label      dictionary key, in this case deepsort detection label, int

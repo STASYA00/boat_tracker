@@ -20,8 +20,8 @@ WORKDIR "./boat_tracker"
 
 RUN pip3 install -r ./requirements.txt
 
-RUN chmod u+x code/main.py
+RUN chmod u+x src/main.py
 
-COPY code/tests/1.mp4 code/tests/1.mp4
+COPY src/tests/1.mp4 src/tests/1.mp4
 
 CMD sh
