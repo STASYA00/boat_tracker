@@ -264,7 +264,7 @@ Stasja - [@stasya00](https://stasyafedorova.wixsite.com/designautomation) - [e-m
 [license-shield]: https://img.shields.io/github/license/STASYA00/boat_tracker.svg?style=for-the-badge
 [license-url]: https://github.com/STASYA00/boat_tracker/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/STASYA00
+[linkedin-url]: https://www.linkedin.com/in/stanislava-fedorova/
 [product-screenshot]: assets/screenshot.png
 
 
