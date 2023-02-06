@@ -126,6 +126,8 @@ to run torch with CUDA
   ```sh
   docker run -dit --name NAME name:tag
   ```
+  Docker copies a local ```1.mp4``` input file into the container. It will be changed to an argument passed during the build.
+  
 * alternatively
 1. Clone the repo
    ```sh
